@@ -55,25 +55,25 @@ python -m venv env
 source env/bin/activate  # On Windows, use `env\Scripts\activate`
 pip install -r requirements.txt
 
-###Usage
+### Usage
 
 Run the main script to compute and print revenue metrics:
 python main.py
 
-###Testing
+### Testing
 
 Run the unit tests using pytest:
 pytest
 
-###Docker Setup
+### Docker Setup
 
-##Build and run the application using Docker:
+## Build and run the application using Docker:
 docker build -t online_store_analysis .
 docker run -it --rm --name online_store_analysis online_store_analysis
 
-##Alternatively, you can use Docker Compose:
+## Alternatively, you can use Docker Compose:
 docker-compose up --build app
 
-###Contributing
+### Contributing
 
 Contributions are welcome! Please create a pull request or open an issue to discuss any changes.
