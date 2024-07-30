@@ -5,7 +5,7 @@ import pandas as pd
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from main import compute_revenue_by_month, compute_revenue_by_product, compute_revenue_by_customer
+from main import read_data, compute_revenue_by_month, compute_revenue_by_product, compute_revenue_by_customer, get_top_customers
 
 @pytest.fixture
 def sample_data():
@@ -39,3 +39,8 @@ def test_compute_revenue_by_product(sample_data):
 def test_compute_revenue_by_customer(sample_data):
     customer_revenue = compute_revenue_by_customer(sample_data)
     assert not customer_revenue.empty, "Customer revenue calculation failed."
+
+def test_get_top_customers(sample_data):
+    customer_revenue = compute_revenue_by_customer(sample_data)
+    top_10_customers = get_top_customers(customer_revenue)
+    assert len(top_10_customers) <= 10, "Top 10 customers calculation failed."
