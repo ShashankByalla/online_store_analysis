@@ -76,4 +76,4 @@ docker-compose up --build app
 
 Contributing
 
-Contributions are welcome! Please create a pull request or open an issue to discuss any changes
+Contributions are welcome! Please create a pull request or open an issue to discuss any changes.
