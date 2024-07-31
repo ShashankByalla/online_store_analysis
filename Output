@@ -1,0 +1,100 @@
+root@debian:~/online_store_analysis# docker-compose up --build app
+[+] Building 3.3s (11/11) FINISHED                               docker:default
+ => [app internal] load build definition from Dockerfile                   0.0s
+ => => transferring dockerfile: 187B                                       0.0s
+ => [app internal] load metadata for docker.io/library/python:3.9-slim     1.9s
+ => [app internal] load .dockerignore                                      0.0s
+ => => transferring context: 2B                                            0.0s
+ => [app 1/5] FROM docker.io/library/python:3.9-slim@sha256:27211e8bbfd2c  0.0s
+ => [app internal] load build context                                      1.3s
+ => => transferring context: 1.29MB                                        1.0s
+ => CACHED [app 2/5] WORKDIR /app                                          0.0s
+ => CACHED [app 3/5] COPY requirements.txt requirements.txt                0.0s
+ => CACHED [app 4/5] RUN pip install -r requirements.txt                   0.0s
+ => CACHED [app 5/5] COPY . .                                              0.0s
+ => [app] exporting to image                                               0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:bf98dec24dc119a32c3e1c77442be8be8fc3064392397  0.0s
+ => => naming to docker.io/library/online_store_analysis-app               0.0s
+ => [app] resolving provenance for metadata file                           0.0s
+WARN[0003] Found orphan containers ([online_store_analysis-app-run-c2bb5a4b26d3 online_store_analysis-app-run-948874c59907 online_store_analysis-app-run-108c99e9dd6c online_store_analysis-app-run-044c647a0cc5 online_store_analysis-app-run-a375c299f2d6 online_store_analysis-app-run-8fea7602b858 online_store_analysis-app-run-f68bc5d8acf9 online_store_analysis-app-run-dcbcac8d3679 online_store_analysis-app-run-5d07c27e2f65 online_store_analysis-app-run-5dbc017c42c7 online_store_analysis-app-run-5e2beff27a38 online_store_analysis-app-run-a27ddc35714c online_store_analysis-app-run-f76940e2e646 online_store_analysis-app-run-44f4d89595be online_store_analysis-app-run-ab9dac997c5f online_store_analysis-app-run-70c6343d8735 online_store_analysis-app-run-6c458ff3cc00 online_store_analysis-app-run-19f2335d8799]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+[+] Running 1/0
+ ✔ Container online_store_analysis-app-1  Created                          0.0s 
+Attaching to app-1
+app-1  | /app/main.py:9: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+app-1  |   return df.groupby('month').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+app-1  | /app/main.py:12: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+app-1  |   return df.groupby('product_name').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+app-1  | /app/main.py:15: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+app-1  |   return df.groupby('customer_id').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+app-1  | Monthly Revenue:
+app-1  |  month
+app-1  | 2024-01     50.0
+app-1  | 2024-02     45.0
+app-1  | 2024-03    120.0
+app-1  | 2024-04    170.0
+app-1  | 2024-05    115.0
+app-1  | Freq: M, dtype: float64
+app-1  | 
+app-1  | Product Revenue:
+app-1  |  product_name
+app-1  | Product A     60.0
+app-1  | Product B     60.0
+app-1  | Product C     15.0
+app-1  | Product D    100.0
+app-1  | Product E    150.0
+app-1  | Product F     35.0
+app-1  | Product G     80.0
+app-1  | dtype: float64
+app-1  | 
+app-1  | Customer Revenue:
+app-1  |  customer_id
+app-1  | 101     60.0
+app-1  | 102     60.0
+app-1  | 103     15.0
+app-1  | 104    100.0
+app-1  | 105    150.0
+app-1  | 106     35.0
+app-1  | 107     80.0
+app-1  | dtype: float64
+app-1  | 
+app-1  | Top 10 Customers:
+app-1  |  customer_id
+app-1  | 105    150.0
+app-1  | 104    100.0
+app-1  | 107     80.0
+app-1  | 101     60.0
+app-1  | 102     60.0
+app-1  | 106     35.0
+app-1  | 103     15.0
+app-1  | dtype: float64
+app-1 exited with code 0
+root@debian:~/online_store_analysis# clear
+
+root@debian:~/online_store_analysis# docker-compose run app pytest
+WARN[0000] Found orphan containers ([online_store_analysis-app-run-c2bb5a4b26d3 online_store_analysis-app-run-948874c59907 online_store_analysis-app-run-108c99e9dd6c online_store_analysis-app-run-044c647a0cc5 online_store_analysis-app-run-a375c299f2d6 online_store_analysis-app-run-8fea7602b858 online_store_analysis-app-run-f68bc5d8acf9 online_store_analysis-app-run-dcbcac8d3679 online_store_analysis-app-run-5d07c27e2f65 online_store_analysis-app-run-5dbc017c42c7 online_store_analysis-app-run-5e2beff27a38 online_store_analysis-app-run-a27ddc35714c online_store_analysis-app-run-f76940e2e646 online_store_analysis-app-run-44f4d89595be online_store_analysis-app-run-ab9dac997c5f online_store_analysis-app-run-70c6343d8735 online_store_analysis-app-run-6c458ff3cc00 online_store_analysis-app-run-19f2335d8799]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up. 
+==================================================================== test session starts =====================================================================
+platform linux -- Python 3.9.19, pytest-8.3.2, pluggy-1.5.0
+rootdir: /app
+collected 4 items                                                                                                                                            
+
+tests/test_main.py ....                                                                                                                                [100%]
+
+====================================================================== warnings summary ======================================================================
+tests/test_main.py::test_compute_revenue_by_month
+  /app/main.py:9: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+    return df.groupby('month').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+
+tests/test_main.py::test_compute_revenue_by_product
+  /app/main.py:12: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+    return df.groupby('product_name').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+
+tests/test_main.py::test_compute_revenue_by_customer
+tests/test_main.py::test_get_top_customers
+  /app/main.py:15: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+    return df.groupby('customer_id').apply(lambda x: (x['product_price'] * x['quantity']).sum())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================================================== 4 passed, 4 warnings in 0.35s ================================================================
+root@debian:~/online_store_analysis# 
+
