@@ -75,7 +75,7 @@ docker run -it --rm --name online_store_analysis online_store_analysis
 docker-compose up --build app
 The output of the docker-compose up --build app command contains the result of running the application, including revenue metrics computed from the dataset.
 
-### Running Tests with Docker Compose
+## Running Tests with Docker Compose
 To run the tests within the Docker environment, use the following command:
 docker-compose run app pytest
 The output file will contain the results of these tests, detailing which tests passed or failed.
